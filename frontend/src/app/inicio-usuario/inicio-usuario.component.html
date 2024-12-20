@@ -1,0 +1,35 @@
+<div class="contenedor-general">
+  <div class="modal-header">
+    <button type="button" class="close-button" (click)="onCancel()">
+      <img src="assets\icons\xmark-svgrepo-com.svg" alt="Cerrar">
+    </button>
+  </div>
+
+  <form #formInicio="ngForm" (ngSubmit)="onSubmit(formInicio)">
+    <h1>Inicia sesión en LavaWash</h1>
+    <div class="form-group">
+      <label for="usuario">Usuario:</label>
+      <input id="usuario" name="usuario" [(ngModel)]="usuario.id_usuario" required minlength="3">
+      <div *ngIf="formInicio.submitted && !formInicio.form.controls['usuario']?.valid" class="error-message">
+        El nombre es requerido y debe tener al menos 3 caracteres.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Contraseña:</label>
+      <input type="password" id="password" name="password" [(ngModel)]="usuario.password" required minlength="6">
+      <div *ngIf="formInicio.submitted && !formInicio.form.controls['password']?.valid" class="error-message">
+        La contraseña es requerida y debe tener al menos 6 caracteres.
+      </div>
+    </div>
+
+    <div class="button-group">
+      <!-- Botón deshabilitado hasta que los campos sean válidos -->
+      <button type="submit" class="submit-button" [disabled]="formInicio.invalid"
+        [ngClass]="{'disabled-button': formInicio.invalid, 'active-button': formInicio.valid}">
+        Iniciar Sesión
+      </button>
+    </div>
+  </form>
+
+</div>

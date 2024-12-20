@@ -1,0 +1,124 @@
+<div class="page">
+    <div id="home">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary main-header">
+            <div class="container">
+                <a class="navbar-brand" href="#"><img loading="lazy" src="assets\images\logo.png" alt="Logo de la empresa minimalista"
+                        class="img-fluid jm-img-header"></a>
+                <button id="menu-movil" class="navbar-toggler jm-hamburguesa" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse jm-ajusteWeb" id="navbarNav">
+                    <ul class="navbar-nav nav-menu">
+                        <li class="nav-item">
+                            <a class="nav-link" href="javascript:void(0)" (click)="toInicio()">INICIO</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="javascript:void(0)" (click)="toNosotros()">SOBRE NOSOTROS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="javascript:void(0)" (click)="toServicios()">SERVICIOS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="javascript:void(0)" (click)="toContacto()">CONTACTANOS</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div id="inicio" class="inicio">
+            <swiper-container autoplay="true" loop="true" pagination="false" navigation="false" speed="1800"
+                loopPreventsSliding="true">
+                <swiper-slide *ngFor="let image of sliderImages; let i = index">
+                    <div class="image-container">
+                        <img loading="eager" [src]="image" alt="Imagen del Swiper">
+                        <div class="text-overlay">
+                            {{ sliderTexts[i] }}
+                            <p>{{ sliderTextsP[i] }}</p>
+                            <a href="/home-inicio-registro" class="btn">UNETENOS</a>
+                        </div>
+                    </div>
+                </swiper-slide>
+            </swiper-container>
+
+        </div>
+
+        <div id="nosotros" class="about-us-section">
+            <div class="about-us-container">
+                <div class="about-text">
+
+                    <h1>Bienvenido a LavaWash</h1>
+                    <p>
+                        Somos una empresa dedicada a ofrecer servicios de calidad en el lavado y detallado de vehículos.
+                        Nuestro objetivo es brindar la mejor experiencia a nuestros clientes, utilizando equipos de
+                        última tecnología y productos amigables con el medio ambiente.
+                    </p>
+                    <p>
+                        Desde nuestros inicios, hemos trabajado para posicionarnos como líderes en el mercado,
+                        ofreciendo
+                        no solo un servicio de lavado, sino una experiencia única.
+                    </p>
+
+                </div>
+                <div class="about-image">
+                    <img loading="lazy" src="/assets/images/carro4.jpg" alt="Sobre nosotros imagen">
+                </div>
+            </div>
+        </div>
+
+        <div id="servicios" class="about-us-section">
+            <div class="seccionServicios">
+                <h2>
+                    Nuestros Servicios
+                </h2>
+                <p>
+                    Ofrecemos una amplia gama de servicios para el cuidado de tu vehículo. Desde un lavado exterior
+                    hasta un detallado completo, en LavaWash nos encargamos de que tu carro luzca como nuevo.
+                </p>
+                <div class="servicioPanel">
+                    <div class="servicioItem">
+                        <img loading="lazy" src="\assets\images\lavadoExterior.jpg" alt="Lavado Exterior">
+                        <h3>Lavado Exterior</h3>
+                    </div>
+                    <div class="servicioItem">
+                        <img loading="lazy" src="\assets\images\lavadoInterior.jpg" alt="Lavado Interior">
+                        <h3>Lavado Interior</h3>
+                    </div>
+                    <div class="servicioItem">
+                        <img loading="lazy" src="\assets\images\detalladoCarro.jpg" alt="Detallado de Carro">
+                        <h3>Detallado de Carro</h3>
+                    </div>
+
+                </div>
+                <div class="pieServicio">
+                    <p>
+                        Si quieres conocer al detalle nuestros servicios, registrate y agenda tu cita.
+                    </p>
+                    <a href="/home-inicio-registro" class="btn">UNETENOS</a>
+                </div>
+
+            </div>
+        </div>
+        
+        <div id="contacto" class="seccionContacto">
+            <div class="contactoContainer">
+                <div class="contactoText">
+                    <h2>Contactanos</h2>
+                    <p>
+                        Si tienes alguna duda o consulta, no dudes en contactarnos. Estamos para ayudarte.
+                    </p>
+                    <p>
+                        Puedes encontrarnos en nuestras redes sociales o escribirnos a nuestro correo electrónico.
+                    </p>
+                </div>
+                <div class="redesSociales">
+                    <a href="https://www.facebook.com" target="_blank">Facebook</a>
+                    <a href="https://www.twitter.com" target="_blank">Twitter</a>
+                    <a href="https://www.instagram.com" target="_blank">Instagram</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

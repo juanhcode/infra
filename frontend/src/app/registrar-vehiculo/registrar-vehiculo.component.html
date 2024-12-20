@@ -1,0 +1,159 @@
+<div class="container">
+  <div class="registrarVehiculo">
+    <h1>Mis Vehiculos</h1>
+    <p>
+      En este espacio podras administrar tus vehiculos.
+      Puedes registrar un nuevo vehiculo, editar o eliminar los que ya tienes registrados.
+    </p>
+    <!-- Button trigger modal -->
+    <div class="contenedorBoton">
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+        class="botonAnadirVehiculo">
+        Añadir nuevo vehiculo
+      </button>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+      aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">Añadir vehiculo</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form #vehiculoForm="ngForm" (ngSubmit)="onSubmit(vehiculoForm)">
+              <div class="mb-3 form-group">
+                <label for="marca" class="col-form-label">Marca:</label>
+                <input type="text" class="form-control" id="marca" name="marca" [(ngModel)]="vehiculo.marca" required>
+                <div *ngIf="vehiculoForm.submitted && !vehiculoForm.form.controls['marca']?.valid"
+                  class="error-message">
+                  La marca es requerida.
+                </div>
+              </div>
+              <div class="mb-3 form-group">
+                <label for="modelo" class="col-form-label">Modelo:</label>
+                <input type="text" class="form-control" id="modelo" name="modelo" [(ngModel)]="vehiculo.modelo"
+                  required>
+                <div *ngIf="vehiculoForm.submitted && !vehiculoForm.form.controls['modelo']?.valid"
+                  class="error-message">
+                  El modelo es requerido.
+                </div>
+              </div>
+              <div class="mb-3 form-group">
+                <label for="color" class="col-form-label">Color:</label>
+                <input type="text" class="form-control" id="color" name="color" [(ngModel)]="vehiculo.color" required>
+                <div *ngIf="vehiculoForm.submitted && !vehiculoForm.form.controls['color']?.valid"
+                  class="error-message">
+                  El color es requerido.
+                </div>
+              </div>
+              <div class="mb-3 form-group">
+                <label for="placa" class="col-form-label">Placa:</label>
+                <input type="text" class="form-control" id="placa" name="placa" [(ngModel)]="vehiculo.placa" required
+                  minlength="5" maxlength="7">
+                <div *ngIf="vehiculoForm.submitted && !vehiculoForm.form.controls['placa']?.valid"
+                  class="error-message">
+                  La placa es requerida y debe tener entre 5 y 7 caracteres.
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn btn-primary submit-button" [disabled]="vehiculoForm.invalid"
+                  [ngClass]="{'disabled-button': vehiculoForm.invalid, 'active-button': vehiculoForm.valid}"
+                  data-bs-dismiss="modal">Añadir</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cards -->
+    <div class="row mt-4 justify-content-center">
+      <div *ngFor="let vehiculo of vehiculos; let i = index" class="col-md-4 mb-4" style="width: 18rem;">
+        <div class="card h-100">
+          <img src="..." class="card-img-top" alt="...">
+          <div class="card-body text-center">
+            <h5 class="card-title">{{ vehiculo.marca }} {{ vehiculo.modelo }}</h5>
+
+            <p class="card-text"><strong>Placa:</strong> {{ vehiculo.placa }}</p>
+          </div>
+
+          <div class="card-body text-center">
+            <!-- Button trigger modal -->
+            <div class="botonesCartas">
+              <button type="button" class="btn btn-primary me-2" data-bs-toggle="modal"
+                [attr.data-bs-target]="'#staticBackdrop2' + i">
+                Editar
+              </button>
+              <button type="submit" class="btn btn-danger" (click)="eliminarVehiculo(vehiculo.placa)">Eliminar</button>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" [attr.id]="'staticBackdrop2' + i" data-bs-backdrop="static" data-bs-keyboard="false"
+              tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Editar</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <form #vehiculoFormUpdate="ngForm" (ngSubmit)="update(vehiculoFormUpdate)">
+                      <div class="mb-3 form-group">
+                        <label for="marca" class="col-form-label">Marca:</label>
+                        <input type="text" class="form-control" id="marca" name="marca" [(ngModel)]="vehiculo.marca"
+                          required>
+                        <div *ngIf="vehiculoFormUpdate.submitted && !vehiculoFormUpdate.form.controls['marca']?.valid"
+                          class="error-message">
+                          La marca es requerida.
+                        </div>
+                      </div>
+                      <div class="mb-3 form-group">
+                        <label for="modelo" class="col-form-label">Modelo:</label>
+                        <input type="text" class="form-control" id="modelo" name="modelo" [(ngModel)]="vehiculo.modelo"
+                          required>
+                        <div *ngIf="vehiculoFormUpdate.submitted && !vehiculoFormUpdate.form.controls['modelo']?.valid"
+                          class="error-message">
+                          El modelo es requerido.
+                        </div>
+                      </div>
+                      <div class="mb-3 form-group">
+                        <label for="color" class="col-form-label">Color:</label>
+                        <input type="text" class="form-control" id="color" name="color" [(ngModel)]="vehiculo.color"
+                          required>
+                        <div *ngIf="vehiculoFormUpdate.submitted && !vehiculoFormUpdate.form.controls['color']?.valid"
+                          class="error-message">
+                          El color es requerido.
+                        </div>
+                      </div>
+                      <div class="d-none">
+                        <label for="placa" class="col-form-label">Placa:</label>
+                        <input type="text" class="form-control" id="placa" name="placa" [(ngModel)]="vehiculo.placa"
+                          required minlength="5" maxlength="7">
+                        <div *ngIf="vehiculoFormUpdate.submitted && !vehiculoFormUpdate.form.controls['placa']?.valid"
+                          class="error-message">
+                          La placa es requerida y debe tener entre 5 y 7 caracteres.
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary submit-button"
+                          [disabled]="vehiculoFormUpdate.invalid"
+                          [ngClass]="{'disabled-button': vehiculoFormUpdate.invalid, 'active-button': vehiculoFormUpdate.valid}"
+                          data-bs-dismiss="modal">Actualizar</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

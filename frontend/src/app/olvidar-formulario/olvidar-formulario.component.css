@@ -1,0 +1,70 @@
+/* Posicionar el ícono de cerrar (X) */
+.modal-header {
+    position: relative;
+  }
+  
+  button.close-button {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  button.close-button img {
+    width: 20px;
+    height: 20px;
+  }
+  
+  form {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+    
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+  }
+  
+  label {
+    font-weight: bold;
+    color: #2980b9;
+  }
+  
+  input {
+    padding: 0.85rem;
+    border: 1px solid #3498db;
+    border-radius: 6px;
+    font-size: 1rem;
+    background-color: #f9f9f9;
+  }
+  
+  .error-message {
+    color: #e74c3c;
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+  }
+  
+  .submit-button {
+    padding: 0.85rem;
+    border-radius: 6px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 1.2rem;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    border: none; 
+    border-radius: 50px;
+    background-color: #038CBA; 
+    color: white;
+  }
+  
+  .submit-button:hover {
+    background-color: rgb(25, 152, 230); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+  }

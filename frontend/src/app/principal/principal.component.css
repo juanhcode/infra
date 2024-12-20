@@ -1,0 +1,459 @@
+
+
+
+/* Estilos para el header */
+.main-header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #038CBA !important;    
+    padding: 10px 0;
+    z-index: 1000;     
+    cursor: pointer;
+}
+
+/* Contenedor para centrar logo y menú */
+.header-container {
+    width: auto;    
+    display: flex;
+    justify-content: center;    
+    align-items: center;
+    text-align: center;
+}
+
+.jm-img-header{
+  height: 50px;
+}
+
+.nav-menu a {
+    color: rgb(255, 255, 255);
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.nav-menu a:hover {
+    color: #ffffff; 
+}
+
+.jm-hamburguesa{
+  background-color: white !important;
+  border: 1px solid transparent !important;
+  padding: 5px !important;
+}
+
+@media (min-width:991px) {
+  .jm-ajusteWeb{
+    justify-content: end !important;
+  }
+}
+
+/* Ajusta el contenido para no superponerse al header */
+body {
+    padding-top: 80px; 
+}
+
+
+
+/* Contenedor del swiper */
+swiper-container {
+    width: 100%;
+    height: auto; 
+    max-height: 960px; 
+    margin: 0 auto;
+  }
+  
+  /* Estilos para las imágenes dentro del swiper */
+  swiper-slide img {
+    width: 100%;
+    height: auto; 
+    max-height: 960px; 
+    object-fit: contain; 
+    border-radius: 10px; 
+  }
+ 
+/* Estilos para el contenedor de la imagen */
+
+.image-container {
+    position: relative; 
+    width: 100%;
+    height: auto;
+  }
+
+  /* Estilos para el texto superpuesto en el centro */
+  .text-overlay {
+    position: absolute;
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    color: #fff;
+    font-size: 72px;
+    line-height: 0.9;
+    font-weight: 405;
+    background-color: rgba(3, 140, 186, .75);
+    padding: 20px;
+    border-radius: 50px; 
+    text-align: center; 
+    width: auto; 
+  }
+
+  .text-overlay p {
+    font-size: 1.8rem;
+    margin-top: 25px;
+    text-align:center;
+    font-weight:bold;
+    color: #fff;
+  }
+  
+  
+  
+/* Estilos para el botón */
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #fff; 
+  color: #038CBA; 
+  font-size: 27px; 
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 50px; 
+  transition: background-color 0.3s ease, transform 0.3s ease; 
+  width: 175px;
+}
+
+/* Efecto hover para el botón */
+.btn:hover {
+  background-color: #02688b; 
+  transform: scale(1.05); 
+  color: #fff;
+}
+
+/* Efecto de clic */
+.btn:active {
+  background-color: #014a5c; 
+  transform: scale(0.98); 
+  color: #fff;
+}
+
+.about-us-section {
+  padding-top: 125px;
+  background-color: #fff;
+}
+
+.about-us-container {
+  display:flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.about-text {
+  flex: 1;
+  padding-right: 20px;
+  max-width: 500px;
+  margin-left: 350px;
+  padding: 20px;
+  background-color: #038CBA;
+  border-radius: 50px;
+}
+
+.about-text h1 {
+  margin: 15px;
+  text-align: center;
+  padding: 15px;
+  font-size: 54px;
+  line-height: 0.9;
+  font-weight: bold;
+  color: #fff;
+}
+
+.about-text p {
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #333;
+  text-justify: auto;
+  padding: 15px;
+  font-weight: 400;
+  line-height: 0.9;
+  color: #fff;
+  line-height: 1;
+}
+
+.about-image {
+  flex: 1;
+  text-align: center;
+}
+
+.about-image img {
+  width: 60%;
+  border-radius: 64px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  max-width: 550px;
+}
+
+/* estilos para seccionServicios */
+
+.seccionServicios {
+  text-align: center;
+  background-color: #333;
+  color: white;
+  padding: 40px 20px;
+  
+}
+
+.seccionServicios h2 {
+  color: #fff;
+  margin-bottom: 40px;
+  font-size: 2rem;
+}
+
+.seccionServicios p {
+  color: #ccc;
+  margin-bottom: 60px;
+  font-size: 1.3rem;
+  
+}
+
+.seccionServicios p span {
+  color: #0096FF;
+  font-weight: bold;
+}
+
+.servicioPanel {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  
+}
+
+.servicioItem {
+  background-color: #444;
+  padding: 10px;
+  border-radius: 8px;
+  transition: transform 0.3s;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.servicioItem:hover {
+  transform: scale(1.05);
+}
+
+.servicioItem img {
+  width: 100%;
+  height: 360px;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+.servicioItem h3 {
+  color: white;
+  font-size: 1rem;
+  margin-top: 10px;
+  font-size: 1.5rem;
+}
+
+.pieServicio{
+  background-color: #333;
+  color: white;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.pieServicio p{
+  font-size: 1.3rem;
+  margin-bottom: 40px;
+}
+
+/* Estilos para el footer */
+
+.seccionContacto {
+  text-align: center;
+  background-color: #333; 
+  color: black; 
+  padding: 40px 20px;
+  box-sizing: border-box; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center; 
+}
+.contactoContainer {
+  max-width: 1200px; 
+  width: 100%; 
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+}
+
+.contactoText {
+  margin-bottom: 30px;
+}
+
+.contactoText h2 {
+  color: #fff;
+  margin-bottom: 10px;
+  font-size: 2rem;
+  margin-top: 0; 
+}
+
+.contactoText p {
+  color: #ccc;
+  margin-bottom: 20px;
+  font-size: 1.3rem;
+}
+
+.redesSociales {
+  display: flex;
+  gap: 20px; 
+  justify-content: center; 
+  align-items: center; 
+}
+
+.redesSociales a {
+  color: #0096FF;
+  font-size: 1.5rem;
+  transition: color 0.3s;
+}
+
+.redesSociales a:hover {
+  color: #fff; 
+}
+
+/* Estilos responsivos */
+
+/* Header */
+@media (max-width: 768px) {
+  .nav-menu {
+      gap: 30px; /* Reduce el espacio entre los elementos */
+  }
+
+  .nav-menu a {
+      font-size: 16px; /* Reduce el tamaño de la fuente */
+  }
+
+  
+}
+
+@media (max-width: 480px) {
+  .header-container {
+      flex-direction: column; /* Apila el logo y el menú en lugar de alinearlos horizontalmente */
+  }
+
+  
+
+  .nav-menu {
+      flex-direction: column; /* Apila los elementos del menú verticalmente */
+      gap: 10px;
+  }
+
+  .nav-menu a {
+      font-size: 14px; /* Reduce el tamaño de la fuente */
+  }
+}
+
+/* swipper */
+@media (max-width: 768px) {
+  .text-overlay {
+      font-size: 48px;
+      padding: 15px;
+      border-radius: 40px;
+  }
+
+  .text-overlay p {
+      font-size: 1.5rem;
+  }
+
+  .btn {
+      font-size: 22px;
+      padding: 8px 16px;
+      width: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+
+  swiper-container {
+    padding-top: 10px;
+  }
+
+  .text-overlay {
+      font-size: 18px;
+      padding: 10px;
+      border-radius: 30px;
+  }
+
+  .text-overlay p {
+      font-size: 0.8rem;
+      margin-top: 12.5px;
+  }
+
+  .btn {
+      font-size: 18px;
+      padding: 6px 12px;
+      width: 125px;
+  }
+}
+
+/* Acerca de nosotros */
+
+@media (max-width: 768px) {
+
+  .about-us-section {
+    padding-top: 80px;
+  }
+
+  .about-us-container {
+    flex-direction: 2 column;
+    padding: 20px;
+  }
+
+  .about-text {
+    margin-left: 0;
+    max-width: 100%;
+    padding: 20px;
+  }
+
+  .about-text h1 {
+    font-size: 36px;
+  }
+
+  .about-text p {
+    font-size: 18px;
+  }
+
+  .about-image img {
+    width: 80%;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .about-us-section {
+    padding-top: 20px;
+  }
+
+  .about-us-container {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .about-text h1 {
+    font-size: 28px;
+  }
+
+  .about-text p {
+    font-size: 16px;
+  }
+
+  .about-image {
+    display: none;
+  }
+
+  .about-image img {
+    display: none;
+  }
+
+}

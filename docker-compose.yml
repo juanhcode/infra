@@ -1,0 +1,45 @@
+services:
+  frontendmono:
+    image: angular-app
+    container_name: frontend-mono
+    ports:
+      - "4200:4200"
+    depends_on:
+      - backendmono
+    networks:
+      - my-network
+
+  backendmono:
+    image: backend-mono
+    container_name: backend-mono
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+    volumes:
+      - ./backend:/app/backend
+    networks:
+      - my-network
+    depends_on:
+      - db-mono
+
+  db-mono:
+    image: mysql:9.1.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: lavadero
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - my-network
+
+
+networks:
+  my-network:
+    driver: bridge
+
+volumes:
+  db_data: # Declaración del volumen

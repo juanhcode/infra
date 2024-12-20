@@ -1,0 +1,31 @@
+/* You can add global styles to this file, and also import other style files */
+/* src/styles.css */
+
+/* Aplica la fuente a toda la aplicación */
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0px;
+  padding-top: 80px;
+
+}
+
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
