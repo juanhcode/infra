@@ -17,7 +17,7 @@
     height: 20px;
   }
   
-  form {
+  .formulario {
     background: rgba(255, 255, 255, 0.95);
     padding: 2.5rem;
     border-radius: 12px;
@@ -61,15 +61,34 @@
     border: none; 
     border-radius: 50px;
   }
+
+  .cambiarBoton{
+    padding: 0.85rem;
+    border-radius: 6px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 1.2rem;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    border: none; 
+    border-radius: 50px;
+    background-color: #037AB5;
+    color: white;
+  }
   
   /* Estilo cuando el formulario es válido */
   .active-button {
-    background-color: #038CBA; /* Verde fuerte */
+    background-color: #037AB5; /* Verde fuerte */
     color: white;
   }
   
   /* Efecto hover solo cuando el botón está habilitado */
   .active-button:hover {
+    background-color: rgb(25, 152, 230); /* Verde más oscuro en hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave al hacer hover */
+  }
+
+  .cambiarBoton:hover {
     background-color: rgb(25, 152, 230); /* Verde más oscuro en hover */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave al hacer hover */
   }

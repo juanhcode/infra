@@ -14,8 +14,11 @@ export class RegistrarVehiculoComponent implements OnInit {
     marca: '',
     modelo: '',
     color: '',
-    placa: ''
+    placa: '',
+    foto: ''
   };
+
+  fotoSeleccionada: File | null = null; // Para almacenar la foto seleccionada
   errorMessage: string | null = null;
 
   constructor(
@@ -25,6 +28,13 @@ export class RegistrarVehiculoComponent implements OnInit {
 
   ngOnInit(): void {
     this.cargarVehiculos();
+  }
+
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.fotoSeleccionada = input.files[0]; // Guardar el archivo seleccionado
+    }
   }
 
   cargarVehiculos(): void {
@@ -41,30 +51,38 @@ export class RegistrarVehiculoComponent implements OnInit {
     }
   }
 
-  onSubmit(form: NgForm) {
-    if (form.valid) {
+  onSubmit(form: NgForm): void {
+    if (form.valid && this.fotoSeleccionada) {
       const id_usuario = localStorage.getItem('id_usuario');
-      const vehiculo = { id_usuario, ...form.value };
-      this.http.post('http://localhost:3000/add-vehicle', vehiculo)
+      const formData = new FormData();
+
+      formData.append('id_usuario', id_usuario!);
+      formData.append('marca', form.value.marca);
+      formData.append('modelo', form.value.modelo);
+      formData.append('color', form.value.color);
+      formData.append('placa', form.value.placa);
+      formData.append('foto', this.fotoSeleccionada);
+
+      this.http.post('http://localhost:3000/add-vehicle', formData)
         .subscribe(
           response => {
             console.log('Respuesta del servidor:', response);
             alert('Vehículo registrado correctamente');
             this.cargarVehiculos();
             form.resetForm();
-            
+            this.fotoSeleccionada = null; // Reiniciar la selección de foto
             this.errorMessage = null;
           },
           error => {
-            
+            console.error('Error al registrar vehículo:', error);
             this.errorMessage = 'Ocurrió un error al registrar el vehículo';
-            alert('Este vehiculo ya se encuentra registrado');
+            alert('Este vehículo ya se encuentra registrado');
           }
         );
     } else {
       this.errorMessage = 'Por favor, completa todos los campos correctamente';
     }
-  }
+}
 
   eliminarVehiculo(placa: string): void {
     if (confirm('¿Estás seguro de que deseas eliminar este vehículo?')) {

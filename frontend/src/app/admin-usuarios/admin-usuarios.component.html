@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="usuarios">
+      <h1>Usuarios Registrados</h1>
+      <p>
+        En este espacio puedes ver todos los usuarios registrados y la cantidad de vehículos que tienen.
+      </p>
+      <!-- Tabla de usuarios -->
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>ID Usuario</th>
+              <th>Nombre</th>
+              <th>Email</th>
+              <th>Cantidad de Vehículos</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let usuario of usuarios">
+              <td>{{ usuario.id_usuario }}</td>
+              <td>{{ usuario.nombre }}</td>
+              <td>{{ usuario.email }}</td>
+              <td>{{ usuario.cantidad_vehiculos }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>

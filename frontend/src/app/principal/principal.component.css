@@ -6,7 +6,7 @@
     position: fixed;
     top: 0;
     width: 100%;
-    background-color: #038CBA !important;    
+    background-color: #037AB5 !important;    
     padding: 10px 0;
     z-index: 1000;     
     cursor: pointer;
@@ -89,7 +89,7 @@ swiper-container {
     font-size: 72px;
     line-height: 0.9;
     font-weight: 405;
-    background-color: rgba(3, 140, 186, .75);
+    background-color: rgba(3, 122, 181, .75);
     padding: 20px;
     border-radius: 50px; 
     text-align: center; 
@@ -111,7 +111,7 @@ swiper-container {
   display: inline-block;
   padding: 10px 20px;
   background-color: #fff; 
-  color: #038CBA; 
+  color: #037AB5; 
   font-size: 27px; 
   font-weight: bold;
   text-align: center;
@@ -152,7 +152,7 @@ swiper-container {
   max-width: 500px;
   margin-left: 350px;
   padding: 20px;
-  background-color: #038CBA;
+  background-color: #037AB5;
   border-radius: 50px;
 }
 

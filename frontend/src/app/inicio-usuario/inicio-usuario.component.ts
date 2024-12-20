@@ -15,38 +15,68 @@ export class InicioUsuarioComponent {
     password: '',
   };
 
+  admin = {
+    id_admin: '',
+    password: '',
+  };
+
+  isAdminLogin = false;
+
   constructor(
     private http: HttpClient,
-    private router: Router, 
-    public dialogRef?: MatDialogRef<InicioUsuarioComponent>    
-  ) {}
+    private router: Router,
+    public dialogRef?: MatDialogRef<InicioUsuarioComponent>
+  ) { }
 
-    onSubmit(form: NgForm) {
-      if (form.valid) {
-        
-        this.http.post('http://backend:3000/login', this.usuario)
-        .subscribe(
-          response => {
-            console.log('Respuesta del servidor:', response);
-            localStorage.setItem('id_usuario', this.usuario.id_usuario);
-            alert('inicio de sesión exitoso');
-            this.dialogRef?.close();  
-            form.resetForm();
-            this.router.navigate(['/sistema/perfil-usuario']);  
-          },
-          error => {
-            console.error('Error al inciar sesion:', error);
-            alert('Ocurrió un error al iniciar sesion el usuario');
-          }
-        );
+  toggleLogin(): void {
+    this.isAdminLogin = !this.isAdminLogin;
+  }
+
+  onSubmit(form: NgForm) {
+    if (form.valid) {
+      if (this.isAdminLogin) {
+        // Login de administrador
+        this.http.post('http://backend-mono:3000/admin-login', this.admin)
+          .subscribe(
+            response => {
+              console.log('Respuesta del servidor:', response);
+              localStorage.setItem('id_admin', this.admin.id_admin);
+              alert('Inicio de sesión de administrador exitoso');
+              this.dialogRef?.close();
+              form.resetForm();
+              this.router.navigate(['/administrador/admin-vehiculos']); // Redirigir a la página de administrador
+            },
+            error => {
+              console.error('Error al iniciar sesión de administrador:', error);
+              alert('Ocurrió un error al iniciar sesión de administrador');
+            }
+          );
       } else {
-        console.log('Formulario inválido');
-        alert('Por favor, completa todos los campos correctamente');
+        // Login de usuario
+        this.http.post('http://backen:3000/login', this.usuario)
+          .subscribe(
+            response => {
+              console.log('Respuesta del servidor:', response);
+              localStorage.setItem('id_usuario', this.usuario.id_usuario);
+              alert('Inicio de sesión exitoso');
+              this.dialogRef?.close();
+              form.resetForm();
+              this.router.navigate(['/sistema/perfil-usuario']); // Redirigir a la página de perfil de usuario
+            },
+            error => {
+              console.error('Error al iniciar sesión:', error);
+              alert('Ocurrió un error al iniciar sesión');
+            }
+          );
       }
+    } else {
+      console.log('Formulario inválido');
+      alert('Por favor, completa todos los campos correctamente');
     }
+  }
 
   onCancel(): void {
-    this.dialogRef?.close(); 
+    this.dialogRef?.close();
   }
 
 }

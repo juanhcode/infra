@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "nodemailer": "^6.9.16",
-    "swiper": "^11.1.14"
-  }
-}

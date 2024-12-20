@@ -5,31 +5,45 @@
     </button>
   </div>
 
-  <form #formInicio="ngForm" (ngSubmit)="onSubmit(formInicio)">
-    <h1>Inicia sesión en LavaWash</h1>
-    <div class="form-group">
-      <label for="usuario">Usuario:</label>
-      <input id="usuario" name="usuario" [(ngModel)]="usuario.id_usuario" required minlength="3">
-      <div *ngIf="formInicio.submitted && !formInicio.form.controls['usuario']?.valid" class="error-message">
-        El nombre es requerido y debe tener al menos 3 caracteres.
-      </div>
-    </div>
+  <div class="login-container">
+    <div class="formulario">
+      <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+        <h1>Inicia sesión en LavaWash</h1>
 
-    <div class="form-group">
-      <label for="password">Contraseña:</label>
-      <input type="password" id="password" name="password" [(ngModel)]="usuario.password" required minlength="6">
-      <div *ngIf="formInicio.submitted && !formInicio.form.controls['password']?.valid" class="error-message">
-        La contraseña es requerida y debe tener al menos 6 caracteres.
-      </div>
-    </div>
+        <div *ngIf="!isAdminLogin">
+          <div class="form-group">
+            <label for="id_usuario">ID Usuario:</label>
+            <input type="text" id="id_usuario" name="id_usuario" [(ngModel)]="usuario.id_usuario" required>
+          </div>
+          <div class="form-group">
+            <label for="password">Contraseña:</label>
+            <input type="password" id="password" name="password" [(ngModel)]="usuario.password" required>
+          </div>
+        </div>
 
-    <div class="button-group">
-      <!-- Botón deshabilitado hasta que los campos sean válidos -->
-      <button type="submit" class="submit-button" [disabled]="formInicio.invalid"
-        [ngClass]="{'disabled-button': formInicio.invalid, 'active-button': formInicio.valid}">
-        Iniciar Sesión
+        <div class="form-group">
+          <div *ngIf="isAdminLogin">
+            <div class="form-group">
+              <label for="id_admin">ID Administrador:</label>
+              <input type="text" id="id_admin" name="id_admin" [(ngModel)]="admin.id_admin" required>
+            </div>
+            <div class="form-group">
+              <label for="password">Contraseña:</label>
+              <input type="password" id="password" name="password" [(ngModel)]="admin.password" required>
+            </div>
+          </div>
+        </div>
+        <div class="button-group">
+          <button class="submit-button" type="submit" [disabled]="loginForm.invalid"
+          [ngClass]="{'disabled-button': loginForm.invalid, 'active-button': loginForm.valid}" >{{ isAdminLogin ? 'Login Administrador' : 'Login Usuario' }}</button>
+        </div>
+      </form>
+      <button (click)="toggleLogin()" class="cambiarBoton">
+        {{ isAdminLogin ? 'Cambiar a Login de Usuario' : 'Cambiar a Login de Administrador' }}
       </button>
     </div>
-  </form>
+
+
+  </div>
 
 </div>

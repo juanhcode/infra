@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="agendamientos">
+    <h1>Todos los Agendamientos</h1>
+    <p>
+      En este espacio puedes ver todos los agendamientos registrados y a qué usuario pertenecen.
+    </p>
+    <!-- Tabla de agendamientos -->
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>ID Usuario</th>
+            <th>Placa</th>
+            <th>Fecha Agendada</th>
+            <th>Hora Agendada</th>
+            <th>Servicios</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cita of agendamientos">
+            <td>{{ cita.id_usuario }}</td>
+            <td>{{ cita.placa }}</td>
+            <td>{{ cita.fecha_agendada }}</td>
+            <td>{{ cita.hora_agendada }}</td>
+            <td>{{ cita.servicios_ids }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

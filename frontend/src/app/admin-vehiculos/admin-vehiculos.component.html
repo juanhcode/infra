@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="registrarVehiculo">
+        <h1>Vehiculos</h1>
+        <p>
+            En este espacio podras administrar los vehiculos de tus clientes.
+        </p>
+        <!-- Cards -->
+        <div class="row mt-4 justify-content-center">
+            <div *ngFor="let vehiculo of vehiculos; let i = index" class="col-md-4 mb-4" style="width: 18rem;">
+                <div class="card h-100">
+                    <img [src]="'http://localhost:3000' + vehiculo.Foto" alt="..." class="card-img-top">
+                    <div class="card-body text-center">
+                        <h2 class="card-title">{{ vehiculo.marca }} {{ vehiculo.modelo }}</h2>
+                        <p class="card-text"><strong>Placa:</strong> {{ vehiculo.placa }}</p>
+                        <p class="card-text"><strong>Usuario:</strong> {{ vehiculo.id_usuario }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

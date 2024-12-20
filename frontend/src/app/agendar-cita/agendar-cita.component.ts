@@ -28,7 +28,7 @@ export class AgendarCitaComponent implements OnInit{
   }
   
   cargarServicios(): void {
-    this.http.get<any[]>('http://backend:3000/get-servicios').subscribe(
+    this.http.get<any[]>('http://localhost:3000/get-servicios').subscribe(
       (data: any) => {
         this.servicios = data;
       },

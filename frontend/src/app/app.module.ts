@@ -17,6 +17,12 @@ import { SistemaComponent } from './sistema/sistema.component';
 import { PerfilUsuarioComponent } from './perfil-usuario/perfil-usuario.component';
 import { RegistrarVehiculoComponent } from './registrar-vehiculo/registrar-vehiculo.component';
 import { AgendarCitaComponent } from './agendar-cita/agendar-cita.component';
+import { AuthService } from './auth/auth.service';
+import { AuthGuard } from './auth/auth.guard';
+import { AdministradorComponent } from './administrador/administrador.component';
+import { AdminVehiculosComponent } from './admin-vehiculos/admin-vehiculos.component';
+import { AdminUsuariosComponent } from './admin-usuarios/admin-usuarios.component';
+import { AdminAgendamientosComponent } from './admin-agendamientos/admin-agendamientos.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +35,11 @@ import { AgendarCitaComponent } from './agendar-cita/agendar-cita.component';
     SistemaComponent,
     PerfilUsuarioComponent,
     RegistrarVehiculoComponent,
-    AgendarCitaComponent
+    AgendarCitaComponent,
+    AdministradorComponent,
+    AdminVehiculosComponent,
+    AdminUsuariosComponent,
+    AdminAgendamientosComponent
 
   ],
   imports: [
@@ -42,9 +52,7 @@ import { AgendarCitaComponent } from './agendar-cita/agendar-cita.component';
   exports: [
     MatDialogModule
   ],
-  providers: [
-    provideAnimationsAsync()
-  ],
+  providers: [provideAnimationsAsync(), AuthService, AuthGuard],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

@@ -23,7 +23,7 @@ body {
 }
 
 .logoEmpresa {
-  max-width: 75%;
+  width: 75%;
   height: auto;
 }
 
@@ -50,7 +50,7 @@ body {
 }
 
 .botonRegistrar .botonHome {
-  background-color: #038CBA;
+  background-color: #037AB5;
   color: white;
 }
 
@@ -61,8 +61,8 @@ body {
 
 .botonIniciar .botonHome {
   background-color: white;
-  color: #038CBA;
-  border: 2px solid #038CBA;
+  color: #037AB5;
+  border: 2px solid #037AB5;
 }
 
 .botonIniciar .botonHome:hover {
@@ -95,7 +95,7 @@ p {
   text-align: left;
   font-weight: 700;
   margin-bottom: 25px;
-  color: #038CBA;
+  color: #037AB5;
 }
 
 /* Estilos responsivos */
@@ -124,6 +124,10 @@ p {
     text-align: center;
   }
 
+  .logoEmpresa {
+    width: 100%;
+  }
+
   
 }
 
@@ -140,4 +144,10 @@ p {
     font-size: 16px;
     padding: 10px;
   }
+  
+  .logoEmpresa {
+    width: 100%;
+  }
+
+
 }

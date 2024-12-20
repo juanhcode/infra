@@ -1,3 +1,7 @@
+<head>
+  <meta name="description"
+    content="Administra tus vehículos y citas de manera eficiente con nuestra plataforma. Registra nuevos vehículos, edita información existente y agenda citas fácilmente. Únete hoy y mantén tu auto en perfecto estado.">
+</head>
 <div class="container">
   <div class="agendarCita">
     <h1>Mis citas</h1>
@@ -6,9 +10,12 @@
       Puedes agendar una nueva cita y ver las que ya tienes agendadas.
     </p>
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-      Agendar nueva cita
-    </button>
+    <div class="contenedorBoton">
+      <button type="button" class="btn btn-primary botonAgendarCita" data-bs-toggle="modal"
+        data-bs-target="#staticBackdrop">
+        Agendar nueva cita
+      </button>
+    </div>
 
     <!-- Modal -->
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -26,14 +33,17 @@
                 <ul class="list-group">
                   <li *ngFor="let servicio of servicios" class="list-group-item">
                     <input class="form-check-input me-1" type="checkbox" [value]="servicio.id_servicio"
-                      [id]="'servicio' + servicio.id_servicio" (change)="onServicioChange($event, servicio.id_servicio)">
-                    <label class="form-check-label" [for]="'servicio' + servicio.id_servicio">{{ servicio.nombre }}</label>
+                      [id]="'servicio' + servicio.id_servicio"
+                      (change)="onServicioChange($event, servicio.id_servicio)">
+                    <label class="form-check-label" [for]="'servicio' + servicio.id_servicio">{{ servicio.nombre
+                      }}</label>
                   </li>
                 </ul>
               </div>
               <div class="cards-container mt-4">
                 <h2>Seleccione el vehiculo</h2>
-                <select class="form-select" aria-label="Default select example" [(ngModel)]="selectedPlaca" name="placa" required>
+                <select class="form-select" aria-label="Default select example" [(ngModel)]="selectedPlaca" name="placa"
+                  required>
                   <option value="" disabled selected>Seleccione una placa</option>
                   <option *ngFor="let placa of placas" [value]="placa.placa">{{ placa.placa }}</option>
                 </select>
@@ -54,16 +64,21 @@
       </div>
     </div>
 
-    <div class="cards-container mt-4">
-      <h2>Mis citas agendadas</h2>
-      <div *ngFor="let cita of agendamientos" class="card my-3" style="width: 18rem;">
-        <div class="card-body">
-          <h5 class="card-title">Cita con placa: {{ cita.placa }}</h5>
-          <!-- Aplicando DatePipe para mostrar solo la fecha -->
-          <p class="card-text">
-            Fecha: {{ cita.fecha_agendada | date:'yyyy-MM-dd' }} | Hora: {{ cita.hora_agendada }}
-          </p>
-          
+    <div class="row mt-4 justify-content-center">
+
+      <div *ngFor="let cita of agendamientos" class="col-md-4 mb-4" style="width: 18rem;">
+        <div class="card h-100">
+          <div class="card-body">
+            <h2 class="card-title">Cita con placa: {{ cita.placa }}</h2>
+            <!-- Aplicando DatePipe para mostrar solo la fecha -->
+            <p class="card-text">
+              <strong> Fecha:</strong> {{ cita.fecha_agendada | date:'yyyy-MM-dd' }}
+            </p>
+            <p class="card-text">
+              <strong>Hora:</strong> {{ cita.hora_agendada }}
+            </p>
+
+          </div>
         </div>
       </div>
     </div>

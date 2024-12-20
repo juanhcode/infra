@@ -1,3 +1,6 @@
+<head>
+  <meta name="description" content="Administra tus vehículos y citas de manera eficiente con nuestra plataforma. Registra nuevos vehículos, edita información existente y agenda citas fácilmente. Únete hoy y mantén tu auto en perfecto estado.">
+</head>
 <div class="container">
   <div class="registrarVehiculo">
     <h1>Mis Vehiculos</h1>
@@ -7,8 +10,7 @@
     </p>
     <!-- Button trigger modal -->
     <div class="contenedorBoton">
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-        class="botonAnadirVehiculo">
+      <button type="button" class="btn btn-primary botonAnadirVehiculo" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
         Añadir nuevo vehiculo
       </button>
     </div>
@@ -58,6 +60,14 @@
                   La placa es requerida y debe tener entre 5 y 7 caracteres.
                 </div>
               </div>
+                <div class="mb-3 form-group">
+                <label for="foto" class="col-form-label">Foto:</label>
+                <input type="file" class="form-control" id="foto" name="foto" (change)="onFileSelected($event)" required>
+                <div *ngIf="vehiculoForm.submitted && !vehiculoForm.form.controls['foto']?.valid"
+                  class="error-message">
+                  La foto es requerida.
+                </div>
+              </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                 <button type="submit" class="btn btn-primary submit-button" [disabled]="vehiculoForm.invalid"
@@ -74,14 +84,14 @@
     <div class="row mt-4 justify-content-center">
       <div *ngFor="let vehiculo of vehiculos; let i = index" class="col-md-4 mb-4" style="width: 18rem;">
         <div class="card h-100">
-          <img src="..." class="card-img-top" alt="...">
+          <img [src]="'http://localhost:3000' + vehiculo.Foto" alt="..." class="card-img-top" >
           <div class="card-body text-center">
-            <h5 class="card-title">{{ vehiculo.marca }} {{ vehiculo.modelo }}</h5>
+            <h2 class="card-title">{{ vehiculo.marca }} {{ vehiculo.modelo }}</h2>
 
             <p class="card-text"><strong>Placa:</strong> {{ vehiculo.placa }}</p>
           </div>
 
-          <div class="card-body text-center">
+          <div class="card-body ">
             <!-- Button trigger modal -->
             <div class="botonesCartas">
               <button type="button" class="btn btn-primary me-2" data-bs-toggle="modal"
@@ -139,11 +149,11 @@
                         </div>
                       </div>
                       <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                         <button type="submit" class="btn btn-primary submit-button"
                           [disabled]="vehiculoFormUpdate.invalid"
                           [ngClass]="{'disabled-button': vehiculoFormUpdate.invalid, 'active-button': vehiculoFormUpdate.valid}"
                           data-bs-dismiss="modal">Actualizar</button>
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                       </div>
                     </form>
                   </div>

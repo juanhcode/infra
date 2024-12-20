@@ -6,14 +6,24 @@ const db = require('./db');
 const nodemailer = require('nodemailer');
 const crypto = require('crypto');
 const moment = require('moment-timezone');
-const morgan = require('morgan');
+const multer = require('./multerConfig');
+
+app.use('/uploads', express.static('uploads'));
+
+
+//necesito probar el multer para subir una foto y guardarla en la carpeta uploads
+app.post('/upload', multer.single('foto'), (req, res) => {
+    if (req.file) {
+        res.status(200).send('Archivo subido correctamente');
+    } else {
+        res.status(400).send('No se subió ningún archivo');
+    }
+});
 
 
 app.use(express.json());
 
 app.use(cors());
-
-app.use(morgan('dev'));
 
 app.listen(3000, () => {
     console.log('Servidor escuchando en el puerto 3000');
@@ -122,31 +132,107 @@ app.post('/login', (req, res) => {
     });
 });
 
-
-
-
-// Ruta para agregar un vehículo a un usuario
-app.post('/add-vehicle', (req, res) => {
+// Ruta para iniciar sesión de administradores
+app.post('/admin-login', (req, res) => {
     console.log(req.body); // Para depuración
-    const {id_usuario, marca, modelo, color, placa } = req.body;
+    const { id_admin, password } = req.body;
 
-    // Validación de campos obligatorios
-    if (!id_usuario || !marca || !modelo || !color || !placa) {
-        return res.status(400).json({ error: 'Todos los campos son requeridos' });
+    if (!id_admin || !password) {
+        return res.status(400).json({ error: 'ID de administrador y contraseña son requeridos' });
     }
 
-    const query = 'INSERT INTO vehiculos (id_usuario, marca, modelo, color, placa) VALUES (?, ?, ?, ?, ?)';
-    db.query(query, [id_usuario, marca, modelo, color, placa], (err, results) => {
+    const query = 'SELECT * FROM admins WHERE id_admin = ? AND password = ?';
+    db.query(query, [id_admin, password], (err, results) => {
         if (err) {
             return res.status(500).json({ error: err.message });
         }
-        res.status(201).json({ message: 'Vehículo agregado exitosamente', placa: placa });
+        if (results.length > 0) {
+            res.status(200).json({ message: 'Inicio de sesión exitoso', tipo_usuario: 'admin' });
+        } else {
+            res.status(400).json({ error: 'ID de administrador o contraseña incorrectos' });
+        }
     });
 });
 
-app.put('/update-vehicle', (req, res) => {
+//dame un servicio para editar la informacion de un usuario sin tipo de usuario
+app.put('/update-user', (req, res) => {
     console.log(req.body); // Para depuración
     console.log("entro"); // Para depuración
+    const { id_usuario, nombre, email, password, telefono } = req.body;
+
+    // Validación de campos obligatorios
+    if (!id_usuario || !nombre || !email || !password || !telefono) {
+        return res.status(400).json({ error: 'Todos los campos son requeridos' });
+    }
+
+    const query = 'UPDATE Usuarios SET nombre = ?, email = ?, password = ?, telefono = ? WHERE id_usuario = ?';
+    db.query(query, [nombre, email, password, telefono, id_usuario], (err, results) => {
+        if (err) {
+            return res.status(500).json({ error: 'Error interno del servidor' });
+        }
+        if (results.affectedRows === 0) {
+            return res.status(404).json({ error: 'Usuario no encontrado' });
+        }
+        res.status(200).json({ message: 'Usuario actualizado exitosamente' });
+    });
+});
+
+//ruta para cargar informacion de un usuario
+app.get('/usuarios/:id_usuario', async (req, res) => {
+    const id_usuario = req.params.id_usuario;
+    console.log(id_usuario); // Para depuración
+
+    const query = 'SELECT * FROM usuarios WHERE id_usuario = ?';
+
+    db.query(query, [id_usuario], (err, results) => {
+        if (err) {
+            console.error('Error en la consulta:', err);
+            return res.status(500).json({ error: 'Error interno del servidor' });
+        }
+
+        if (results.length > 0) {
+            res.status(200).json(results[0]); // Devuelve solo el primer resultado
+        } else {
+            res.status(404).json({ message: 'Usuario no encontrado' });
+        }
+
+  });
+});
+
+
+// Ruta para agregar un vehículo a un usuario
+app.post('/add-vehicle', multer.single('foto'), (req, res) => {
+    const { id_usuario, marca, modelo, color, placa } = req.body; // Obtener id_usuario y demás datos del cuerpo de la solicitud
+    // Validar datos requeridos
+    if (!id_usuario || !marca || !modelo || !color || !placa || !req.file) {
+        return res.status(400).json({ error: 'Todos los campos son obligatorios, incluida la foto.' });
+    }
+    // Ruta del archivo subido
+    const foto = `/uploads/${req.file.filename}`;
+    // Mostrar lo que se enviará a la consulta (para depuración)
+    console.log('Datos recibidos:', { id_usuario, marca, modelo, color, placa, foto });
+
+    // Insertar datos en la base de datos
+    const query = `
+        INSERT INTO vehiculos (id_usuario, marca, modelo, color, placa, foto)
+        VALUES (?, ?, ?, ?, ?, ?)
+    `;
+    db.query(query, [id_usuario, marca, modelo, color, placa, foto], (err, results) => {
+        if (err) {
+            console.error('Error al guardar el vehículo en la base de datos:', err.message);
+            return res.status(500).json({ error: 'Error al guardar el vehículo en la base de datos', details: err.message });
+        }
+        res.status(201).json({ 
+            message: 'Vehículo agregado exitosamente', 
+            data: { id_usuario, marca, modelo, color, placa, foto } 
+        });
+    });
+});
+
+
+app.put('/update-vehicle', (req, res) => {
+    console.log(req.body); // Para depuración
+    
     const { marca, modelo, color, placa } = req.body;
 
     // Validación de campos obligatorios
@@ -205,6 +291,20 @@ app.get('/vehicles/:id_usuario', (req, res) => {
         if (err) {
             return res.status(500).json({ error: 'Error interno del servidor' });
         }
+        res.status(200).json({ vehicles: results });
+    });
+});
+
+// Ruta para obtener todos los vehículos y sus usuarios
+app.get('/userVehicles', (req, res) => {
+    const query = 'SELECT * FROM vehiculos';
+
+    db.query(query, (err, results) => {
+        if (err) {
+            console.error('Error al obtener los vehículos y usuarios:', err);
+            return res.status(500).json({ error: 'Error en la base de datos' });
+        }
+
         res.status(200).json({ vehicles: results });
     });
 });
@@ -286,6 +386,21 @@ app.get('/agendamientos/:id_usuario', (req, res) => {
     });
 });
 
+// Ruta para obtener todos los agendamientos y sus usuarios
+app.get('/userAgenda', (req, res) => {
+    const query = 'SELECT * FROM agendamientos';
+
+    db.query(query, (err, results) => {
+        if (err) {
+            console.error('Error al obtener los agendamientos y usuarios:', err);
+            return res.status(500).json({ error: 'Error en la base de datos' });
+        }
+
+        res.status(200).json({ agendamientos: results });
+    });
+});
+
+
 app.get('/get-servicios', (req, res) => {
     const query = 'SELECT * FROM servicios';  // Consulta para obtener todos los servicios de la tabla
 
@@ -322,3 +437,21 @@ app.get('/placas/:id_usuario', (req, res) => {
     });
 });
 
+// Ruta para obtener todos los usuarios y la cantidad de vehículos que tienen
+app.get('/usuariosTotales', (req, res) => {
+    const query = `
+        SELECT u.id_usuario, u.nombre, u.email, COUNT(v.placa) AS cantidad_vehiculos
+        FROM usuarios u
+        LEFT JOIN vehiculos v ON u.id_usuario = v.id_usuario
+        GROUP BY u.id_usuario, u.nombre, u.email
+    `;
+
+    db.query(query, (err, results) => {
+        if (err) {
+            console.error('Error al obtener los usuarios y vehículos:', err);
+            return res.status(500).json({ error: 'Error en la base de datos' });
+        }
+
+        res.status(200).json({ usuarios: results });
+    });
+});
