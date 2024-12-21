@@ -17,6 +17,11 @@ echo "Instalando cliente mysql..."
 apt-get update
 apt-get install -y default-mysql-client
 
+# Si ya existe la base de datos, no insertar lavadero.sql
+if mysql -h db-mono -u root -proot lavadero -e "SHOW TABLES;" | cat; then
+  echo "La base de datos lavadero ya existe, no se insertará lavadero.sql"
+  exec $cmd
+fi
 
 # Insertar lavadero.sql a la base de datos
 echo "Insertando lavadero.sql a la base de datos..."
