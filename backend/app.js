@@ -21,7 +21,7 @@ app.post('/upload', multer.single('foto'), (req, res) => {
 });
 
 const corsOptions = {
-    origin: 'http://localhost:4200', //http://frontendmono:4200
+    origin: 'http://localhost:4200',
     methods: 'GET,POST,PUT,DELETE',
 };
 
