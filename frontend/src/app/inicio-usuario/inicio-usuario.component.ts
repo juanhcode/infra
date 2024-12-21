@@ -36,7 +36,7 @@ export class InicioUsuarioComponent {
     if (form.valid) {
       if (this.isAdminLogin) {
         // Login de administrador
-        this.http.post('http://backend-mono:3000/admin-login', this.admin)
+        this.http.post('http://localhost:3000/admin-login', this.admin)
           .subscribe(
             response => {
               console.log('Respuesta del servidor:', response);
@@ -53,7 +53,7 @@ export class InicioUsuarioComponent {
           );
       } else {
         // Login de usuario
-        this.http.post('http://backen:3000/login', this.usuario)
+        this.http.post('http://localhost:3000/login', this.usuario)
           .subscribe(
             response => {
               console.log('Respuesta del servidor:', response);

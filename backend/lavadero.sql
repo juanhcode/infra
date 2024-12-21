@@ -102,8 +102,8 @@ INSERT INTO `servicios` (`id_servicio`, `nombre`, `precio`) VALUES
 -- Estructura de tabla para la tabla `usuarios`
 --
 
-DROP TABLE IF EXISTS `usuarios`;
-CREATE TABLE IF NOT EXISTS `usuarios` (
+DROP TABLE IF EXISTS `Usuarios`;
+CREATE TABLE IF NOT EXISTS `Usuarios` (
   `id_usuario` varchar(50) NOT NULL,
   `nombre` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
@@ -118,7 +118,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id_usuario`, `nombre`, `email`, `password`, `telefono`, `tipo_usuario`) VALUES
+INSERT INTO `Usuarios` (`id_usuario`, `nombre`, `email`, `password`, `telefono`, `tipo_usuario`) VALUES
 ('acerrin', 'Kevin Steven', 'prueba222@corre.com', '123qwe', '123456789', 'persona'),
 ('felipe123', 'felipe andrade', 'felipe@correo.com', '123asd', '3202803445', 'persona'),
 ('Jmcoc', 'Juan Manuel', 'juanmanuelramirezagudelo4@gmail.com', 'naran5', '3155906456', 'persona'),
@@ -163,7 +163,7 @@ INSERT INTO `vehiculos` (`id_usuario`, `marca`, `modelo`, `color`, `placa`, `Fot
 -- Filtros para la tabla `agendamientos`
 --
 ALTER TABLE `agendamientos`
-  ADD CONSTRAINT `agendamientos_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`) ON DELETE CASCADE,
+  ADD CONSTRAINT `agendamientos_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `Usuarios` (`id_usuario`) ON DELETE CASCADE,
   ADD CONSTRAINT `agendamientos_ibfk_2` FOREIGN KEY (`placa`) REFERENCES `vehiculos` (`placa`) ON DELETE CASCADE;
 COMMIT;
 

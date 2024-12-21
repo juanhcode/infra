@@ -20,10 +20,14 @@ app.post('/upload', multer.single('foto'), (req, res) => {
     }
 });
 
+const corsOptions = {
+    origin: 'http://localhost:4200', //http://frontendmono:4200
+    methods: 'GET,POST,PUT,DELETE',
+};
 
 app.use(express.json());
 
-app.use(cors());
+app.use(cors(corsOptions));
 
 app.listen(3000, () => {
     console.log('Servidor escuchando en el puerto 3000');
@@ -182,7 +186,7 @@ app.get('/usuarios/:id_usuario', async (req, res) => {
     const id_usuario = req.params.id_usuario;
     console.log(id_usuario); // Para depuración
 
-    const query = 'SELECT * FROM usuarios WHERE id_usuario = ?';
+    const query = 'SELECT * FROM Usuarios WHERE id_usuario = ?';
 
     db.query(query, [id_usuario], (err, results) => {
         if (err) {
